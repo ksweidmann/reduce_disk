@@ -6,8 +6,8 @@ partition="/dev/mapper/loop10p1"
 
 sudo losetup ${device} ${file}
 sudo kpartx -av ${device}
-sudo fsck -f ${partition}
-sudo resize2fs -M ${partition}
+sudo fsck -fy ${partition}
+sudo resize2fs -f -M ${partition}
 
 old_disk_size=$(sudo blockdev --getsize64 ${device})
 bc=$(sudo dumpe2fs -h ${partition} 2>&1 | grep 'Block count' | awk '{print $3}')
